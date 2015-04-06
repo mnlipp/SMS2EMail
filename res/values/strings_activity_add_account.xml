@@ -32,5 +32,9 @@
 	</string>    
 	<string name="enforce_trusted_certificates_summary_off">
 	    Allow untrusted certificates when connecting
-	</string>    
+	</string>
+	<string name="smtp_port_title">SMTP(STARTTLS) Port</string>
+	<string name="smtps_port_title">SMTP/TLS Port</string>
+	<string name="using_default_port">Using default port (%1$d)</string>
+	<string name="using_port">Using port %1$d</string>
 </resources>

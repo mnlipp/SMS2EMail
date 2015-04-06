@@ -22,6 +22,18 @@
             android:defaultValue="true"
             android:persistent="false" />
         
-    </PreferenceCategory>
+        <EditTextPreference 
+            android:key="smtp_port"
+            android:title="@string/smtp_port_title"
+            android:inputType="number"
+            android:persistent="false"/>
+        
+        <EditTextPreference 
+            android:key="smtps_port"
+            android:title="@string/smtps_port_title"
+            android:inputType="number"
+            android:persistent="false" />
+        
+        </PreferenceCategory>
     
 </PreferenceScreen>

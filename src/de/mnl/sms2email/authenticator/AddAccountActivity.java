@@ -54,6 +54,8 @@ public class AddAccountActivity extends Activity {
 	private View loginFormView;
 	private boolean enforceSecureConnections = true;
 	private boolean enforceTrustedConnections = true;
+	private Integer smtpPort = null;
+	private Integer smtpsPort = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,8 @@ public class AddAccountActivity extends Activity {
 						enforceSecureConnections);
 				intent.putExtra(AddAccountAdvanced.ENFORCE_TRUSTED_CERTIFICATES,
 						enforceTrustedConnections);
+				intent.putExtra(AddAccountAdvanced.SMTP_PORT, smtpPort);
+				intent.putExtra(AddAccountAdvanced.SMTPS_PORT, smtpsPort);
 				startActivityForResult(intent, ADVANCED_SETTINGS_REQUEST);
 			}
 		});
@@ -104,6 +108,10 @@ public class AddAccountActivity extends Activity {
 				(AddAccountAdvanced.ENFORCE_SECURE_CONNECTIONS, false);
 			enforceTrustedConnections = data.getBooleanExtra
 					(AddAccountAdvanced.ENFORCE_TRUSTED_CERTIFICATES, false);
+			smtpPort = (Integer)
+					data.getSerializableExtra(AddAccountAdvanced.SMTP_PORT);
+			smtpsPort = (Integer)
+					data.getSerializableExtra(AddAccountAdvanced.SMTPS_PORT);
 		}
 	}
 
