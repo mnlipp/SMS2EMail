@@ -52,13 +52,15 @@ public class AddAccountActivity extends Activity {
 	private Button advancedSettingsButton;
 	private View progressView;
 	private View loginFormView;
-	private boolean enforceSecureConnections = true; 
+	private boolean enforceSecureConnections = true;
+	private boolean enforceTrustedConnections = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_add_account);
-
+		
 		// Set up the form.
 		accountNameView = (EditText) findViewById(R.id.account_name);
 		serverUriView = (EditText) findViewById(R.id.host_name);
@@ -73,6 +75,8 @@ public class AddAccountActivity extends Activity {
 					(AddAccountActivity.this, AddAccountAdvanced.class); 
 				intent.putExtra(AddAccountAdvanced.ENFORCE_SECURE_CONNECTIONS,
 						enforceSecureConnections);
+				intent.putExtra(AddAccountAdvanced.ENFORCE_TRUSTED_CERTIFICATES,
+						enforceTrustedConnections);
 				startActivityForResult(intent, ADVANCED_SETTINGS_REQUEST);
 			}
 		});
@@ -98,6 +102,8 @@ public class AddAccountActivity extends Activity {
 		if (requestCode == ADVANCED_SETTINGS_REQUEST) {
 			enforceSecureConnections = data.getBooleanExtra
 				(AddAccountAdvanced.ENFORCE_SECURE_CONNECTIONS, false);
+			enforceTrustedConnections = data.getBooleanExtra
+					(AddAccountAdvanced.ENFORCE_TRUSTED_CERTIFICATES, false);
 		}
 	}
 

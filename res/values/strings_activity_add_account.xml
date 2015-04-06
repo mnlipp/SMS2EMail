@@ -4,10 +4,14 @@
 
     <!-- Strings related to account adding -->
     <string name="base_settings_title">Server settings</string>
-    <string name="prompt_account_name">Account name</string>
-    <string name="prompt_smtp_host">SMTP Host</string>
-    <string name="prompt_username">Username</string>
-    <string name="prompt_password">Password</string>
+    <string name="account_name_label">Account name</string>
+    <string name="prompt_account_name">Enter account name</string>
+    <string name="smtp_host_label">SMTP host</string>
+    <string name="prompt_smtp_host">Enter SMTP host</string>
+    <string name="username_label">Username</string>
+    <string name="prompt_username">Enter Username</string>
+    <string name="password_label">Password</string>
+    <string name="prompt_password">Enter Password</string>
     <string name="action_create"><b>Create account</b></string>
     <string name="action_create_short">Create</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -15,12 +19,18 @@
     <string name="title_activity_add_account_advanced">Add Account</string>
     <string name="advanced_settings">Advanced settings</string>
     <string name="security_settings_title">Security settings</string>
-	<string name="enforce_secure_connections_title">Enforce secure connections</string>    
-	<string name="enforce_secure_connections_summary">
+	<string name="enforce_secure_connections_title">Secure connection</string>    
+	<string name="enforce_secure_connections_summary_on">
 	    Allow only connections to the server that use SSL/TLS
 	</string>    
-	<string name="enforce_trusted_certificates_title">Enforce trusted certificates</string>    
-	<string name="enforce_trusted_certificates_summary">
+	<string name="enforce_secure_connections_summary_off">
+	    Allow insecure connections
+	</string>    
+		<string name="enforce_trusted_certificates_title">Trusted certificates</string>    
+	<string name="enforce_trusted_certificates_summary_on">
 	    Allow only connections to servers that provide trusted certificates
+	</string>    
+	<string name="enforce_trusted_certificates_summary_off">
+	    Allow untrusted certificates when connecting
 	</string>    
 </resources>

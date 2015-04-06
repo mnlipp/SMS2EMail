@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory 
+        android:key="pref_key_security_settings"
+        android:title="@string/security_settings_title"
+        android:persistent="false">
+        
+        <CheckBoxPreference
+            android:key="enforce_secure_connections"
+            android:title="@string/enforce_secure_connections_title"
+            android:summaryOn="@string/enforce_secure_connections_summary_on"
+            android:summaryOff="@string/enforce_secure_connections_summary_off"
+            android:defaultValue="true"
+            android:persistent="false" />
+        
+        <CheckBoxPreference
+            android:key="enforce_trusted_certificates"
+            android:title="@string/enforce_trusted_certificates_title"
+            android:summaryOn="@string/enforce_trusted_certificates_summary_on"
+            android:summaryOff="@string/enforce_trusted_certificates_summary_off"
+            android:defaultValue="true"
+            android:persistent="false" />
+        
+    </PreferenceCategory>
+    
+</PreferenceScreen>

@@ -31,6 +31,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+			<TextView android:text="@string/account_name_label" 
+			    android:layout_height="wrap_content" 
+			    android:layout_width="fill_parent" 
+			    android:textAppearance="?android:attr/textAppearanceSmall" 
+			    android:textColor="?android:attr/textColorPrimary"/>
             <EditText
                 android:id="@+id/account_name"
                 android:layout_width="match_parent"
@@ -40,14 +45,23 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
-	       <TextView
+           	<TextView
 	           style="?android:attr/listSeparatorTextViewStyle"
+	           android:paddingStart="0dp"
+	           android:paddingLeft="0dp"
+	           android:paddingRight="0dp"
+	           android:paddingEnd="0dp"
 	           android:id="@+id/base_settings_title"
 	           android:layout_width="match_parent"
 	           android:layout_height="wrap_content"
 	           android:text="@string/base_settings_title" />
                  
-            <EditText
+			<TextView android:text="@string/smtp_host_label" 
+			    android:layout_height="wrap_content" 
+			    android:layout_width="fill_parent" 
+			    android:textAppearance="?android:attr/textAppearanceSmall" 
+			    android:textColor="?android:attr/textColorPrimary"/>
+           	<EditText
                 android:id="@+id/host_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +73,12 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
-            <EditText
+			<TextView android:text="@string/username_label" 
+			    android:layout_height="wrap_content" 
+			    android:layout_width="fill_parent" 
+			    android:textAppearance="?android:attr/textAppearanceSmall" 
+			    android:textColor="?android:attr/textColorPrimary"/>
+           	<EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,7 +91,12 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
-            <EditText
+			<TextView android:text="@string/password_label" 
+			    android:layout_height="wrap_content" 
+			    android:layout_width="fill_parent" 
+			    android:textAppearance="?android:attr/textAppearanceSmall" 
+			    android:textColor="?android:attr/textColorPrimary"/>
+           	<EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,10 +119,6 @@
                 style="android:buttonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-                android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
-                android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
                 android:background="?android:attr/selectableItemBackground"
                 android:gravity="start|center_vertical"
                 android:text="@string/advanced_settings" />
