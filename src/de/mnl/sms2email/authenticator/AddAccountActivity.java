@@ -52,10 +52,7 @@ public class AddAccountActivity extends Activity {
 	private Button advancedSettingsButton;
 	private View progressView;
 	private View loginFormView;
-	private boolean enforceSecureConnections = true;
-	private boolean enforceTrustedConnections = true;
-	private Integer smtpPort = null;
-	private Integer smtpsPort = null;
+	private AddAccountAdvanced.Data xtraData = new AddAccountAdvanced.Data();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +72,7 @@ public class AddAccountActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent
 					(AddAccountActivity.this, AddAccountAdvanced.class); 
-				intent.putExtra(AddAccountAdvanced.ENFORCE_SECURE_CONNECTIONS,
-						enforceSecureConnections);
-				intent.putExtra(AddAccountAdvanced.ENFORCE_TRUSTED_CERTIFICATES,
-						enforceTrustedConnections);
-				intent.putExtra(AddAccountAdvanced.SMTP_PORT, smtpPort);
-				intent.putExtra(AddAccountAdvanced.SMTPS_PORT, smtpsPort);
+				intent.putExtra(AddAccountAdvanced.DATA, xtraData);
 				startActivityForResult(intent, ADVANCED_SETTINGS_REQUEST);
 			}
 		});
@@ -104,14 +96,8 @@ public class AddAccountActivity extends Activity {
 			return;
 		}
 		if (requestCode == ADVANCED_SETTINGS_REQUEST) {
-			enforceSecureConnections = data.getBooleanExtra
-				(AddAccountAdvanced.ENFORCE_SECURE_CONNECTIONS, false);
-			enforceTrustedConnections = data.getBooleanExtra
-					(AddAccountAdvanced.ENFORCE_TRUSTED_CERTIFICATES, false);
-			smtpPort = (Integer)
-					data.getSerializableExtra(AddAccountAdvanced.SMTP_PORT);
-			smtpsPort = (Integer)
-					data.getSerializableExtra(AddAccountAdvanced.SMTPS_PORT);
+			xtraData = (AddAccountAdvanced.Data)
+					data.getSerializableExtra(AddAccountAdvanced.DATA);
 		}
 	}
 

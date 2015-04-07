@@ -1,5 +1,7 @@
 package de.mnl.sms2email.authenticator;
 
+import java.io.Serializable;
+
 import de.mnl.sms2email.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,61 +13,59 @@ import android.preference.PreferenceFragment;
 
 public class AddAccountAdvanced extends Activity {
 
-	public static final String 
-		ENFORCE_SECURE_CONNECTIONS = "enforceSecureConnections";
-	public static final String 
-		ENFORCE_TRUSTED_CERTIFICATES = "enforceTrustedCertificates";
-	public static final String SMTP_PORT = "smtpPort";
-	public static final String SMTPS_PORT = "smtpsPort";
+	public static final String DATA = AddAccountAdvanced.class + ".data"; 
 
+	@SuppressWarnings("serial")
+	public static class Data implements Serializable {
+		public boolean enforceSecureConnections = true;
+		public boolean enforceTrustedCertificates = true;
+		public Integer smtpPort = null;
+		public Integer smtpsPort = null;
+	}
+
+	private Data data;
 	private PreferenceFragment fragment;
 	private CheckBoxPreference secureConnectionsCheckBox;
 	private CheckBoxPreference trustedCertificatesCheckBox;
-	private Integer smtpPort = null;
-	private Integer smtpsPort = null;
 	private EditTextPreference smtpPortText;
 	private EditTextPreference smtpsPortText;
-	
+
 	private class AccountSettingsFragment extends PreferenceFragment {
 	    @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        // Load the preferences from an XML resource
 	        addPreferencesFromResource(R.xml.account_preferences);
+
+	        // Setup form
 		    secureConnectionsCheckBox = (CheckBoxPreference)
 		    		fragment.findPreference("enforce_secure_connections");
-			secureConnectionsCheckBox.setChecked
-				(getIntent().getBooleanExtra(ENFORCE_SECURE_CONNECTIONS, true));
-		    
 		    trustedCertificatesCheckBox = (CheckBoxPreference)
 		    		fragment.findPreference("enforce_trusted_certificates");
-			trustedCertificatesCheckBox.setChecked
-				(getIntent().getBooleanExtra(ENFORCE_TRUSTED_CERTIFICATES, true));
-
-			smtpPort = getIntent().getIntExtra(SMTP_PORT, 25);
-			smtpsPort = getIntent().getIntExtra(SMTPS_PORT, 465);
-			
 			smtpPortText = (EditTextPreference)
-				fragment.findPreference("smtp_port");
+					fragment.findPreference("smtp_port");
+			smtpsPortText = (EditTextPreference)
+					fragment.findPreference("smtps_port");
+
+		    secureConnectionsCheckBox.setChecked(data.enforceSecureConnections);
+			trustedCertificatesCheckBox.setChecked
+				(data.enforceTrustedCertificates);
 			smtpPortText.setOnPreferenceChangeListener
 				(new Preference.OnPreferenceChangeListener() {
 				@Override
 				public boolean onPreferenceChange
 						(Preference preference, Object newValue) {
-					smtpPort = parseNumber(newValue);
+					data.smtpPort = parseNumber(newValue);
 					updateSummaries();
 					return true;
 				}
 			});
-			
-			smtpsPortText = (EditTextPreference)
-				fragment.findPreference("smtps_port");
 			smtpsPortText.setOnPreferenceChangeListener
 				(new Preference.OnPreferenceChangeListener() {
 				@Override
 				public boolean onPreferenceChange(
 						Preference preference, Object newValue) {
-					smtpsPort = parseNumber(newValue);
+					data.smtpsPort = parseNumber(newValue);
 					updateSummaries();
 					return true;
 				}
@@ -84,19 +84,19 @@ public class AddAccountAdvanced extends Activity {
 	    }
 	    
 	    private void updateSummaries () {
-	    	if (smtpPort == null) {
+	    	if (data.smtpPort == null) {
 	    		smtpPortText.setSummary(getResources().getString
 	    				(R.string.using_default_port, 25));
 	    	} else {
 	    		smtpPortText.setSummary(getResources().getString
-	    				(R.string.using_port, smtpPort));	    		
+	    				(R.string.using_port, data.smtpPort));	    		
 	    	}
-	    	if (smtpsPort == null) {
+	    	if (data.smtpsPort == null) {
 	    		smtpsPortText.setSummary(getResources().getString
 	    				(R.string.using_default_port, 465));
 	    	} else {
 	    		smtpsPortText.setSummary(getResources().getString
-	    				(R.string.using_port, smtpsPort));	    		
+	    				(R.string.using_port, data.smtpsPort));	    		
 	    	}
 	    }
 	}
@@ -104,6 +104,7 @@ public class AddAccountAdvanced extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		data = (Data)getIntent().getSerializableExtra(DATA);
 		fragment = new AccountSettingsFragment();
 	    // Display the fragment as the main content.
 	    getFragmentManager().beginTransaction()
@@ -114,16 +115,8 @@ public class AddAccountAdvanced extends Activity {
 	@Override
 	public void finish() {
 		Intent resultIntent = new Intent();
-	    resultIntent.putExtra(ENFORCE_SECURE_CONNECTIONS, 
-	    		secureConnectionsCheckBox.isChecked());
-	    resultIntent.putExtra(ENFORCE_TRUSTED_CERTIFICATES, 
-	    		trustedCertificatesCheckBox.isChecked());
-	    resultIntent.putExtra(SMTP_PORT, smtpPort);
-	    resultIntent.putExtra (SMTPS_PORT, smtpsPort);
-	    
+	    resultIntent.putExtra(DATA, data); 
 		setResult(RESULT_OK, resultIntent); 
-
 		super.finish();
 	}
-	
 }
